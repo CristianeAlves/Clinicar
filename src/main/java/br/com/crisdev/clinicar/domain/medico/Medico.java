@@ -52,4 +52,8 @@ public class Medico {
             endereco.atualizarInformacoes(dados.endereco());
         }
     }
+
+    public void excluir() {
+        this.ativo = false;
+    }
 }
