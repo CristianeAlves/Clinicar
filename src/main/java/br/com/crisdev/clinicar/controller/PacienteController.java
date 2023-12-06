@@ -33,4 +33,12 @@ public class PacienteController {
         var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemPaciente::new);
         return ResponseEntity.ok().body(page);
     }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizar(@RequestBody DadosAtualizacaoPaciente dados) {
+        var paciente = repository.getReferenceById(dados.id());
+        paciente.atualizarInformacoes(dados);
+        return ResponseEntity.ok().body(new DadosDetalhamentoPaciente(paciente));
+    }
 }
