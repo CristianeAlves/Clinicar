@@ -1,4 +1,4 @@
-package br.com.crisdev.clinicar.infra;
+package br.com.crisdev.clinicar.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
