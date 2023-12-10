@@ -1,7 +1,6 @@
 package br.com.crisdev.clinicar.domain.medico;
 
 import br.com.crisdev.clinicar.domain.endereco.DadosEndereco;
-import br.com.crisdev.clinicar.domain.endereco.Endereco;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -9,19 +8,19 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public record DadosCadastroMedico(
-        @NotBlank
+        @NotBlank(message = "{nome.obrigatorio}")
         String nome,
-        @NotBlank
-        @Pattern(regexp = "\\d{4,6}")
+        @NotBlank(message = "{crm.obrigatorio}")
+        @Pattern(regexp = "\\d{4,6}", message = "{crm.invalido}")
         String crm,
-        @NotBlank
-        @Email
+        @NotBlank(message = "{email.obrigatorio}")
+        @Email(message = "{email.invalido}")
         String email,
-        @NotBlank
+        @NotBlank(message = "{telefone.obrigatorio}")
         String telefone,
-        @NotNull
+        @NotNull(message = "especialidade.obrigatoria")
         Especialidade especialidade,
-        @NotNull
+        @NotNull(message = "endereco.obrigatorio")
         @Valid
         DadosEndereco endereco
 ) {
