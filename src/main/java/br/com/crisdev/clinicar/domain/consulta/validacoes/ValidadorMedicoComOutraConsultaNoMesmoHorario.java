@@ -1,6 +1,7 @@
 package br.com.crisdev.clinicar.domain.consulta.validacoes;
 
 import br.com.crisdev.clinicar.domain.ValidacaoException;
+import br.com.crisdev.clinicar.domain.consulta.ConsultaRepository;
 import br.com.crisdev.clinicar.domain.consulta.DadosAgendamentoConsulta;
 import br.com.crisdev.clinicar.domain.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class ValidadorMedicoComOutraConsultaNoMesmoHorario implements ValidadorAgendamentoDeConsulta {
 
     @Autowired
-    private MedicoRepository repository;
+    private ConsultaRepository repository;
 
     public void validar(DadosAgendamentoConsulta dados) {
         var medicoPossuiOutraConsultaNoMesmoHorario = repository.existsByMedicoAndData(dados.idMedico(), dados.data());

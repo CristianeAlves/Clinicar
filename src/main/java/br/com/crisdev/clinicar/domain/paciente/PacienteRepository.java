@@ -18,7 +18,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
             p.id = :id
             
             """)
-    Boolean findAtivoById(Long idPaciente);
+    Boolean findAtivoById(Long id);
 
-    Boolean existsByPacienteIdAndDataBetween(Long idPaciente, LocalDateTime primeiroHorario, LocalDateTime ultimoHorario);
+
 }
