@@ -2,11 +2,13 @@ package br.com.crisdev.clinicar.domain.consulta.validacoes;
 
 import br.com.crisdev.clinicar.domain.ValidacaoException;
 import br.com.crisdev.clinicar.domain.consulta.DadosAgendamentoConsulta;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class ValidadorHorarioAntecedencia {
+@Component
+public class ValidadorHorarioAntecedencia implements ValidadorAgendamentoDeConsulta{
 
     public void validar(DadosAgendamentoConsulta dados) {
         var dataConsulta = dados.data();
