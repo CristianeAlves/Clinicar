@@ -1,7 +1,8 @@
-package br.com.crisdev.clinicar.domain.consulta.validacoes;
+package br.com.crisdev.clinicar.domain.consulta.validacoes.agendamento;
 
 import br.com.crisdev.clinicar.domain.ValidacaoException;
 import br.com.crisdev.clinicar.domain.consulta.DadosAgendamentoConsulta;
+import br.com.crisdev.clinicar.domain.consulta.validacoes.agendamento.ValidadorAgendamentoDeConsulta;
 import br.com.crisdev.clinicar.domain.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

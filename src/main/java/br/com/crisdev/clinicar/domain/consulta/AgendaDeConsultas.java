@@ -1,7 +1,8 @@
 package br.com.crisdev.clinicar.domain.consulta;
 
 import br.com.crisdev.clinicar.domain.ValidacaoException;
-import br.com.crisdev.clinicar.domain.consulta.validacoes.ValidadorAgendamentoDeConsulta;
+import br.com.crisdev.clinicar.domain.consulta.validacoes.agendamento.ValidadorAgendamentoDeConsulta;
+import br.com.crisdev.clinicar.domain.consulta.validacoes.cancelamento.ValidadorCancelamentoDeConsulta;
 import br.com.crisdev.clinicar.domain.medico.Medico;
 import br.com.crisdev.clinicar.domain.medico.MedicoRepository;
 import br.com.crisdev.clinicar.domain.paciente.PacienteRepository;
@@ -25,6 +26,9 @@ public class AgendaDeConsultas {
     @Autowired
     private List<ValidadorAgendamentoDeConsulta> validadores;
 
+    @Autowired
+    private List<ValidadorCancelamentoDeConsulta> validadoresCancelamento;
+
     public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados) {
         if (!pacienteRepository.existsById(dados.idPaciente())) {
             throw new ValidacaoException("Id do paciente informado não existe");
@@ -41,7 +45,7 @@ public class AgendaDeConsultas {
         if (medico == null) {
             throw new ValidacaoException("Não existe médico disponível nessa data");
         }
-        var consulta = new Consulta(null, medico, paciente, dados.data());
+        var consulta = new Consulta(null, medico, paciente, dados.data(), null);
         consultaRepository.save(consulta);
 
         return new DadosDetalhamentoConsulta(consulta);
@@ -57,5 +61,16 @@ public class AgendaDeConsultas {
         }
 
         return medicoRepository.escolherMedicoAleatorioLivreNaData(dados.especialidade(), dados.data());
+    }
+
+    public void cancelar(DadosCancelamentoConsulta dados) {
+        if (!consultaRepository.existsById(dados.idConsulta())) {
+            throw new ValidacaoException("Id da consulta informado não existe!");
+        }
+
+        validadoresCancelamento.forEach(v -> v.validar(dados));
+
+        var consulta = consultaRepository.getReferenceById(dados.idConsulta());
+        consulta.cancelar(dados.motivo());
     }
 }

@@ -1,4 +1,4 @@
-package br.com.crisdev.clinicar.domain.consulta.validacoes;
+package br.com.crisdev.clinicar.domain.consulta.validacoes.agendamento;
 
 import br.com.crisdev.clinicar.domain.consulta.DadosAgendamentoConsulta;
 
